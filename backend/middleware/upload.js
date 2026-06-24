@@ -44,6 +44,10 @@ const uploadCertificate = multer({ storage: createStorage('certificates'), fileF
 const uploadBlog        = multer({ storage: createStorage('blog'),         fileFilter: imageFilter, limits: { fileSize: maxSize } });
 const uploadTestimonial = multer({ storage: createStorage('testimonials'), fileFilter: imageFilter, limits: { fileSize: maxSize } });
 const uploadResume      = multer({ storage: createStorage('resumes'),      fileFilter: pdfFilter,   limits: { fileSize: maxSize } });
+const uploadCvDocument  = multer({ storage: createStorage('cv_documents'), fileFilter: (req, file, cb) => {
+  if ([...allowedImageTypes, ...allowedPdfTypes, 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/msword'].includes(file.mimetype)) cb(null, true);
+  else cb(new Error('Only PDF, DOCX, or DOC files are allowed for CV documents'), false);
+}, limits: { fileSize: maxSize } });
 
 // Error handler for multer
 const handleUploadError = (err, req, res, next) => {
@@ -67,5 +71,6 @@ module.exports = {
   uploadBlog,
   uploadTestimonial,
   uploadResume,
+  uploadCvDocument,
   handleUploadError,
 };

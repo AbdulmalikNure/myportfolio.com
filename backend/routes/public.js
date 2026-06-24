@@ -75,4 +75,10 @@ router.post('/contact',
 // Analytics tracking
 router.post('/analytics/track', analyticsCtrl.trackEvent);
 
+// CV Documents (public)
+const cvCtrl = require('../controllers/cvDocumentsController');
+router.get('/cv-documents',                cvCtrl.getPublicDocuments);
+router.get('/cv-documents/:id/view',       cvCtrl.viewDocument);
+router.get('/cv-documents/:id/download',   cvCtrl.downloadDocument);
+
 module.exports = router;

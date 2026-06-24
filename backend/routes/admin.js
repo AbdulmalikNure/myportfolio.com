@@ -124,6 +124,16 @@ router.delete('/social-links/:id',  socialCtrl.remove);
 router.get('/resumes',      resumeCtrl.listResumes);
 router.post('/resume',      uploadResume.single('resume'), resumeCtrl.uploadResume);
 
+// CV Documents (admin)
+const cvCtrl         = require('../controllers/cvDocumentsController');
+const { uploadCvDocument } = require('../middleware/upload');
+router.get('/cv-documents',                   cvCtrl.getAllDocuments);
+router.post('/cv-documents',                  uploadCvDocument.single('file'), cvCtrl.uploadDocument);
+router.put('/cv-documents/:id',               uploadCvDocument.single('file'), cvCtrl.updateDocument);
+router.delete('/cv-documents/:id',            cvCtrl.deleteDocument);
+router.get('/cv-documents/:id/preview',       cvCtrl.previewDocument);
+router.get('/cv-documents/:id/download',      cvCtrl.adminDownloadDocument);
+
 // Analytics
 router.get('/analytics', analyticsCtrl.getAnalytics);
 

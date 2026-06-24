@@ -17,6 +17,7 @@ import Testimonials from './pages/Testimonials';
 import Messages from './pages/Messages';
 import SocialLinks from './pages/SocialLinks';
 import Resume from './pages/Resume';
+import CvDocuments from './pages/CvDocuments';
 import Analytics from './pages/Analytics';
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
@@ -60,6 +61,7 @@ export default function App() {
         <Route path="/messages"     element={<Messages />} />
         <Route path="/social-links" element={<SocialLinks />} />
         <Route path="/resume"       element={<Resume />} />
+        <Route path="/cv-documents" element={<CvDocuments />} />
         <Route path="/analytics"    element={<Analytics />} />
       </Route>
 

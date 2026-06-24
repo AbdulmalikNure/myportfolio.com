@@ -5,7 +5,7 @@ import toast from 'react-hot-toast';
 import {
   LayoutDashboard, Settings, User, Code2, Briefcase, GraduationCap,
   Award, Image, FileText, MessageSquare, Link2, Upload, BarChart2,
-  Star, Layers, Menu, X, LogOut, ExternalLink,
+  Star, Layers, Menu, X, LogOut, ExternalLink, FileBadge,
 } from 'lucide-react';
 
 const navItems = [
@@ -24,6 +24,7 @@ const navItems = [
   { to: '/messages',     label: 'Messages',     icon: MessageSquare },
   { to: '/social-links', label: 'Social Links', icon: Link2 },
   { to: '/resume',       label: 'Resume',       icon: Upload },
+  { to: '/cv-documents', label: 'CV Management',icon: FileBadge },
   { to: '/analytics',   label: 'Analytics',    icon: BarChart2 },
 ];
 

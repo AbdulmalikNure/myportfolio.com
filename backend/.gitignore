@@ -1,0 +1,11 @@
+node_modules/
+.env
+logs/*.log
+uploads/profiles/*
+uploads/projects/*
+uploads/gallery/*
+uploads/certificates/*
+uploads/resumes/*
+uploads/blog/*
+uploads/testimonials/*
+!uploads/**/.gitkeep

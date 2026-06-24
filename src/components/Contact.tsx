@@ -5,25 +5,35 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
+import { apiClient } from "@/lib/api";
 
 export const Contact = () => {
   const { toast } = useToast();
-  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [formData, setFormData] = useState({ name: "", email: "", phone: "", subject: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-
-    // Simulate form submission
-    setTimeout(() => {
+    try {
+      await apiClient.submitContact({
+        full_name: formData.name,
+        email: formData.email,
+        phone: formData.phone || undefined,
+        subject: formData.subject || undefined,
+        message: formData.message,
+      });
       toast({
         title: "Message Sent!",
         description: "Thank you for reaching out. I'll get back to you soon.",
       });
-      setFormData({ name: "", email: "", message: "" });
+      setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
+    } catch (err: any) {
+      const msg = err?.message || err?.errors?.[0]?.message || "Failed to send message. Please try again.";
+      toast({ title: "Error", description: msg, variant: "destructive" });
+    } finally {
       setIsSubmitting(false);
-    }, 1000);
+    }
   };
 
   return (
@@ -133,6 +143,34 @@ export const Contact = () => {
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   className="bg-background/50"
                   placeholder="your.email@example.com"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="phone" className="block text-sm font-medium mb-2">
+                  Phone <span className="text-muted-foreground text-xs">(optional)</span>
+                </label>
+                <Input
+                  id="phone"
+                  type="tel"
+                  value={formData.phone}
+                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  className="bg-background/50"
+                  placeholder="+251 9XX XXX XXX"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="subject" className="block text-sm font-medium mb-2">
+                  Subject <span className="text-muted-foreground text-xs">(optional)</span>
+                </label>
+                <Input
+                  id="subject"
+                  type="text"
+                  value={formData.subject}
+                  onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                  className="bg-background/50"
+                  placeholder="Project inquiry, collaboration..."
                 />
               </div>
 

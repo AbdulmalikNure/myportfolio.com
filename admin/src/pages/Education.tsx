@@ -86,7 +86,7 @@ export default function Education() {
               <h3 className="font-semibold">{item.institution}</h3>
               <p className="text-sm text-primary">{item.degree} {item.department && `— ${item.department}`}</p>
               <p className="text-xs text-muted mt-1">
-                {item.start_date?.slice(0, 4)} — {item.end_date?.slice(0, 4) || 'Present'}
+                {item.start_date?.slice(0, 4)} — {item.end_date?.slice(0, 4) || 'Present'} E.C
               </p>
               {item.description && <p className="text-sm text-muted mt-2">{item.description}</p>}
             </div>

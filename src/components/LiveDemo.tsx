@@ -111,7 +111,7 @@ const MarqueeRow = ({
 
 export const LiveDemo = () => {
   return (
-    <section id="live-demo" className="py-20 overflow-hidden bg-gradient-to-b from-background to-card/20">
+    <section id="live-demo" className="py-12 overflow-hidden bg-gradient-to-b from-background to-card/20">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}

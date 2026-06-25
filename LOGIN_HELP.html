@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login Credentials</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-center;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        h1 {
+            color: #667eea;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .credential {
+            background: #f7f7f7;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid #667eea;
+        }
+        .label {
+            font-weight: bold;
+            color: #666;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        .value {
+            font-size: 20px;
+            color: #333;
+            font-family: 'Courier New', monospace;
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            word-break: break-all;
+            user-select: all;
+        }
+        .copy-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            width: 100%;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+        .copy-btn:hover {
+            background: #5568d3;
+        }
+        .copy-btn:active {
+            background: #4451b8;
+        }
+        .success {
+            background: #4caf50 !important;
+        }
+        .links {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f0f0f0;
+            border-radius: 10px;
+        }
+        .links h2 {
+            color: #333;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        .link-item {
+            margin: 10px 0;
+        }
+        .link-item a {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+        }
+        .link-item a:hover {
+            text-decoration: underline;
+        }
+        .warning {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .warning strong {
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔐 Admin Login Credentials</h1>
+        
+        <div class="credential">
+            <div class="label">📧 EMAIL:</div>
+            <div class="value" id="email">myportfolio@gmail.com</div>
+            <button class="copy-btn" onclick="copyText('email', this)">📋 Copy Email</button>
+        </div>
+        
+        <div class="credential">
+            <div class="label">🔑 PASSWORD (9 characters):</div>
+            <div class="value" id="password">@Ab7340di</div>
+            <button class="copy-btn" onclick="copyText('password', this)">📋 Copy Password</button>
+        </div>
+        
+        <div class="warning">
+            <strong>✅ PASSWORD UPDATED!</strong> The password is now case-sensitive and exactly 9 characters:
+            <br><br>
+            <code>@Ab7340di</code>
+            <br><br>
+            Please copy the password from above to login!
+        </div>
+        
+        <div class="links">
+            <h2>🌐 Where to Login:</h2>
+            <div class="link-item">
+                <strong>1️⃣ Admin Panel:</strong><br>
+                <a href="http://localhost:5174" target="_blank">http://localhost:5174</a>
+            </div>
+            <div class="link-item">
+                <strong>2️⃣ Secret Portal:</strong><br>
+                Go to <a href="http://localhost:8080" target="_blank">http://localhost:8080</a> and click your profile image 7 times
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function copyText(elementId, button) {
+            const text = document.getElementById(elementId).textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                const originalText = button.textContent;
+                button.textContent = '✅ Copied!';
+                button.classList.add('success');
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.classList.remove('success');
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

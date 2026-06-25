@@ -43,6 +43,7 @@ export const apiClient = {
   getResume:       () => get<any>('/resume'),
   getTestimonials: () => get<any[]>('/testimonials'),
   getEducation:    () => get<any[]>('/education'),
+  getExperience:   () => get<any>('/experience'),
   getBlog:         (params = '') => get<any>(`/blog${params}`),
   submitContact:   (data: object) => post<any>('/contact', data),
   getCvDocuments:  () => get<any[]>('/cv-documents'),

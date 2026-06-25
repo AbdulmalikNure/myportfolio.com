@@ -8,13 +8,13 @@ export const About = () => {
   const [cvModalOpen, setCvModalOpen] = useState(false);
 
   return (
-    <section id="about" className="py-20 bg-gradient-to-b from-card/20 to-background">
+    <section id="about" className="py-12 bg-gradient-to-b from-card/20 to-background">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-10"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             <span className="text-gradient">About Me</span>
@@ -55,15 +55,14 @@ export const About = () => {
               exceptional digital experiences through design and code.
             </p>
             <p className="text-lg text-muted-foreground leading-relaxed mb-4">
-              I completed my elementary education (Grade 1-8) at Habe Elementary School from 2002 to
-              2009 E.C, followed by my high school education (Grade 9-10) at Habe Secondary School.
-              I then attended Robe Didea School for Grade 11 &amp; 12 in 2012 and 2013 E.C.
+              I completed my elementary education (Grade 1-8) at Habe Elementary School from 1995 to
+              2002 E.C, followed by my high school education (Grade 9-10) at Habe Secondary School from
+              2002 to 2004 E.C. I then attended Robe Didea School for preparatory (Grade 11 &amp; 12) in 2005 and 2006 E.C.
             </p>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              In 2014 E.C, I successfully passed the Entrance Exam and was admitted to Haramaya
-              University. Currently, I am Graduated from Haramaya University by Information System
-              Department, where I continue to develop my skills in graphic design, video editing, and
-              web development.
+              In 2007 E.C (2015 G.C), I was admitted to Haramaya University, where I studied Information Systems
+              and graduated in 2010 E.C (2018 G.C). During my time at university, I developed my skills in graphic design, 
+              video editing, and web development.
             </p>
 
             {/* ── Stat cards ─────────────────────────────────────────────── */}

@@ -5,7 +5,6 @@
 
 -- Extensions
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-CREATE EXTENSION IF NOT EXISTS "pg_trgm";
 
 -- ============================================================
 -- USERS / ADMIN
@@ -132,7 +131,6 @@ CREATE TABLE IF NOT EXISTS projects (
 CREATE INDEX IF NOT EXISTS idx_projects_category    ON projects(category);
 CREATE INDEX IF NOT EXISTS idx_projects_is_featured ON projects(is_featured);
 CREATE INDEX IF NOT EXISTS idx_projects_status      ON projects(status);
-CREATE INDEX IF NOT EXISTS idx_projects_name_trgm   ON projects USING gin(name gin_trgm_ops);
 
 -- ============================================================
 -- EDUCATION
@@ -291,7 +289,8 @@ CREATE TABLE IF NOT EXISTS analytics (
 
 CREATE INDEX IF NOT EXISTS idx_analytics_event   ON analytics(event_type);
 CREATE INDEX IF NOT EXISTS idx_analytics_created ON analytics(created_at DESC);
-CREATE INDEX IF NOT EXISTS idx_analytics_date    ON analytics(DATE(created_at));
+-- Removed DATE(created_at) index - not needed and causes issues in PostgreSQL 18
+-- CREATE INDEX IF NOT EXISTS idx_analytics_date    ON analytics(DATE(created_at));
 
 -- ============================================================
 -- UPDATE TRIGGER FUNCTION

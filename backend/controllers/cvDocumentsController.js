@@ -37,12 +37,19 @@ const getPublicDocuments = async (req, res) => {
  */
 const viewDocument = async (req, res) => {
   try {
-    const result = await query(
-      "SELECT * FROM cv_documents WHERE id = $1 AND status = 'active'",
+    // Try to find by ID first (UUID), then fall back to document_type
+    let result = await query(
+      "SELECT * FROM cv_documents WHERE (id = $1 OR document_type = $1) AND status = 'active'",
       [req.params.id]
     );
+    
     const doc = result.rows[0];
-    if (!doc) return res.status(404).json({ success: false, message: 'Document not found' });
+    if (!doc) {
+      return res.status(404).json({ 
+        success: false, 
+        message: 'Document not found. Please upload CV documents through the admin panel first.' 
+      });
+    }
 
     // Track view
     await query(
@@ -72,12 +79,19 @@ const viewDocument = async (req, res) => {
  */
 const downloadDocument = async (req, res) => {
   try {
-    const result = await query(
-      "SELECT * FROM cv_documents WHERE id = $1 AND status = 'active'",
+    // Try to find by ID first (UUID), then fall back to document_type
+    let result = await query(
+      "SELECT * FROM cv_documents WHERE (id = $1 OR document_type = $1) AND status = 'active'",
       [req.params.id]
     );
+    
     const doc = result.rows[0];
-    if (!doc) return res.status(404).json({ success: false, message: 'Document not found' });
+    if (!doc) {
+      return res.status(404).json({ 
+        success: false, 
+        message: 'Document not found. Please upload CV documents through the admin panel first.' 
+      });
+    }
 
     // Track download
     await query(

@@ -17,6 +17,9 @@ const login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
+    logger.info(`Login attempt for email: ${email}`);
+    logger.debug(`Password length: ${password ? password.length : 0}`);
+
     const result = await query(
       'SELECT id, name, email, password, role, is_active, avatar FROM users WHERE email = $1',
       [email.toLowerCase().trim()]
@@ -24,11 +27,14 @@ const login = async (req, res) => {
     const user = result.rows[0];
 
     if (!user || !user.is_active) {
+      logger.warn(`User not found or inactive: ${email}`);
       return res.status(401).json({ success: false, message: 'Invalid credentials' });
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
+    logger.info(`Password match result: ${isMatch}`);
     if (!isMatch) {
+      logger.warn(`Password mismatch for user: ${email}`);
       return res.status(401).json({ success: false, message: 'Invalid credentials' });
     }
 

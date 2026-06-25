@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
 import profilePhoto from "@/assets/profile-photo.jpg";
+import { AdminLoginModal } from "./AdminLoginModal";
+import { useToast } from "@/hooks/use-toast";
 
 const professions = [
   "Graphic Designer",
@@ -15,6 +17,10 @@ export const Hero = () => {
   const [currentProfession, setCurrentProfession] = useState(0);
   const [displayText, setDisplayText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
+  const [clickCount, setClickCount] = useState(0);
+  const [showAdminModal, setShowAdminModal] = useState(false);
+  const [clickTimeout, setClickTimeout] = useState<NodeJS.Timeout | null>(null);
+  const { toast } = useToast();
 
   useEffect(() => {
     const profession = professions[currentProfession];
@@ -40,6 +46,29 @@ export const Hero = () => {
 
     return () => clearTimeout(timeout);
   }, [displayText, isDeleting, currentProfession]);
+
+  // Handle profile image clicks for admin access (silent - no visual feedback)
+  const handleProfileClick = () => {
+    // Clear existing timeout
+    if (clickTimeout) {
+      clearTimeout(clickTimeout);
+    }
+
+    const newClickCount = clickCount + 1;
+    setClickCount(newClickCount);
+
+    // If 7 clicks reached, open admin modal
+    if (newClickCount === 7) {
+      setShowAdminModal(true);
+      setClickCount(0); // Reset counter
+    } else {
+      // Reset counter after 3 seconds of inactivity
+      const timeout = setTimeout(() => {
+        setClickCount(0);
+      }, 3000);
+      setClickTimeout(timeout);
+    }
+  };
 
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
@@ -72,13 +101,17 @@ export const Hero = () => {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="relative w-24 h-24 md:w-32 md:h-32 flex-shrink-0"
+              className="relative w-24 h-24 md:w-32 md:h-32 flex-shrink-0 cursor-pointer"
+              onClick={handleProfileClick}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
               <div className="absolute inset-0 bg-gradient-to-r from-primary to-cyan-400 rounded-full blur-xl opacity-40" />
               <img
                 src={profilePhoto}
                 alt="Abdulmalik Nure Jemal"
-                className="relative rounded-full w-full h-full object-cover border-4 border-primary/30 shadow-2xl"
+                className="relative rounded-full w-full h-full object-cover border-4 border-primary/30 shadow-2xl select-none"
+                draggable="false"
               />
             </motion.div>
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold">
@@ -134,6 +167,12 @@ export const Hero = () => {
       >
         <ChevronDown className="w-8 h-8 text-primary animate-bounce" />
       </motion.div>
+
+      {/* Admin Login Modal */}
+      <AdminLoginModal
+        isOpen={showAdminModal}
+        onClose={() => setShowAdminModal(false)}
+      />
     </section>
   );
 };

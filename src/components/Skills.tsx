@@ -50,13 +50,13 @@ const SkillBar = ({ name, level, delay }: { name: string; level: number; delay: 
 
 export const Skills = () => {
   return (
-    <section id="skills" className="py-20 bg-gradient-to-b from-background to-card/20">
+    <section id="skills" className="py-12 bg-gradient-to-b from-background to-card/20">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-10"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             <span className="text-gradient">My Skills</span>
@@ -65,7 +65,7 @@ export const Skills = () => {
         </motion.div>
 
         {/* Core Skills */}
-        <div className="grid md:grid-cols-3 gap-8 mb-20 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-8 mb-12 max-w-6xl mx-auto">
           {coreSkills.map((skill, index) => (
             <motion.div
               key={skill.name}

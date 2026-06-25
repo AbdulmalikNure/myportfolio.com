@@ -27,13 +27,13 @@ const services = [
 
 export const Services = () => {
   return (
-    <section id="services" className="py-20 bg-gradient-to-b from-card/20 to-background">
+    <section id="services" className="py-12 bg-gradient-to-b from-card/20 to-background">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-10"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             <span className="text-gradient">My Services</span>

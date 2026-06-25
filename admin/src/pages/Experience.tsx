@@ -92,7 +92,7 @@ export default function Experience() {
               <h3 className="font-semibold">{item.position}</h3>
               <p className="text-sm text-primary">{item.company}</p>
               <p className="text-xs text-muted mt-1">
-                {item.start_date?.slice(0, 7)} — {item.is_current ? 'Present' : item.end_date?.slice(0, 7) || ''}
+                {item.start_date?.slice(0, 7)} — {item.is_current ? 'Present' : item.end_date?.slice(0, 7) || ''} E.C
               </p>
               {item.description && <p className="text-sm text-muted mt-2">{item.description}</p>}
             </div>

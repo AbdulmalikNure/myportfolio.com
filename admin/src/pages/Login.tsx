@@ -31,7 +31,7 @@ export default function Login() {
           <h1 className="text-2xl font-bold text-primary mb-2">Admin Login</h1>
           <p className="text-muted text-sm mb-8">Sign in to manage your portfolio</p>
 
-          <form onSubmit={handleSubmit} className="space-y-5">
+          <form onSubmit={handleSubmit} className="space-y-5" autoComplete="off">
             <div>
               <label className="block text-sm text-muted mb-1">Email</label>
               <input
@@ -39,8 +39,9 @@ export default function Login() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
+                autoComplete="off"
                 className="w-full bg-bg border border-border rounded-lg px-4 py-2.5 text-text placeholder-muted focus:outline-none focus:border-primary"
-                placeholder="admin@portfolio.com"
+                placeholder="Enter your email"
               />
             </div>
             <div>
@@ -50,8 +51,9 @@ export default function Login() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
+                autoComplete="new-password"
                 className="w-full bg-bg border border-border rounded-lg px-4 py-2.5 text-text placeholder-muted focus:outline-none focus:border-primary"
-                placeholder="••••••••"
+                placeholder="Enter your password"
               />
             </div>
             <button

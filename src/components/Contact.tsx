@@ -37,13 +37,13 @@ export const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-20 bg-gradient-to-b from-background to-card/20">
+    <section id="contact" className="py-12 bg-gradient-to-b from-background to-card/20">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-10"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             <span className="text-gradient">Get In Touch</span>

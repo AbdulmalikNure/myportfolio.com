@@ -1,17 +1,14 @@
-services:
-  # PostgreSQL Database
-  - type: pserv
-    name: portfolio-db
-    env: docker
-    plan: free
-    region: oregon
+databases:
+  - name: portfolio-db
+    databaseName: portfolio_db
+    user: portfolio_user
 
+services:
   # Backend API
   - type: web
     name: portfolio-backend
     env: node
     region: oregon
-    plan: free
     buildCommand: cd backend && npm install
     startCommand: cd backend && npm start
     envVars:
@@ -30,33 +27,28 @@ services:
       - key: JWT_REFRESH_EXPIRES_IN
         value: 7d
       - key: ADMIN_EMAIL
-        value: myportfolio@gmail.com
+        value: admin@myportfolio.com
       - key: ADMIN_PASSWORD
-        value: "@Ab7340diand"
+        generateValue: true
 
   # Frontend Portfolio
   - type: web
     name: portfolio-frontend
     env: static
     region: oregon
-    plan: free
     buildCommand: npm install && npm run build
     staticPublishPath: ./dist
     envVars:
       - key: VITE_API_URL
-        value: https://portfolio-backend.onrender.com/api
+        sync: false
 
   # Admin Panel
   - type: web
     name: portfolio-admin
     env: static
     region: oregon
-    plan: free
     buildCommand: cd admin && npm install && npm run build
     staticPublishPath: ./admin/dist
-
-databases:
-  - name: portfolio-db
-    plan: free
-    databaseName: portfolio_db
-    user: portfolio_user
+    envVars:
+      - key: VITE_API_URL
+        sync: false
